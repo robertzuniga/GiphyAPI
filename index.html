@@ -40,9 +40,9 @@
     data-state="still" 
     class="gif">
   
-    <img src=     "https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" 
-    data-still=   "https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" 
-    data-animate= "https://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" 
+    <img src="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" 
+    data-still="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" 
+    data-animate="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" 
     data-state="still" 
     class="gif">
   
@@ -66,8 +66,9 @@
 
         var animal = $(this).attr("data-name");
         // var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=cats";
-        var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&tag=" + animal;
-          
+        //var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&tag=" + animal;
+        var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&tag=cat"
+
         console.log(queryURL);
 
         $.ajax({
@@ -122,10 +123,8 @@
           $("#buttons-view").append(a);
         }
       } // end function renderButtons 
-
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // This function handles events where one button is clicked
       $("#add-animal").on("click", function (event) {
         event.preventDefault();
