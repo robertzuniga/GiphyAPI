@@ -11,24 +11,6 @@
 </head>
 
 <body>
-<!-- 
-    <img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" 
-    data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" 
-    data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" 
-    data-state="still" class="gif">
-  
-    <img src="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" 
-    data-still="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" 
-    data-animate="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" 
-    data-state="still" class="gif">
-  
-    <img src="https://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" 
-    data-still="https://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" 
-    data-animate="https://media3.giphy.com/media/W6LbnBigDe4ZG/200.gif" 
-    data-state="still" class="gif">
-   -->
-
-
 
   <div class="container">
     <h1>Giphy Search</h1>
@@ -45,29 +27,49 @@
     </form>
 <hr>
     <!-- Animal Giphy will Get Dumped Here -->
-    <div id="images">
-    </div>
+    <div id="images"> </div>
 
     <div id="animal-view"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<!-- 
+    <img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" 
+    data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" 
+    data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" 
+    data-state="still" 
+    class="gif">
+  
+    <img src=     "https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" 
+    data-still=   "https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" 
+    data-animate= "https://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" 
+    data-state="still" 
+    class="gif">
+  
+    <img src=    "https://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" 
+    data-still=  "https://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" 
+    data-animate="https://media3.giphy.com/media/W6LbnBigDe4ZG/200.gif" 
+    data-state="still" 
+    class="gif">
+   -->
 
 
-      <script>
+
+    <script>
 
       // Initial array of topics
       
-      var topics = ["dog" "cat" ];
-
+      var topics = ["dog","cat"];
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // Function for dumping the JSON content for each button into the div
       function displayAnimalInfo() {
 
         var animal = $(this).attr("data-name");
         // var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=cats";
-        var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=" + animal;
-
+        var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&tag=" + animal;
+          
         console.log(queryURL);
+
         $.ajax({
           url: queryURL,
           method: "GET"
@@ -81,15 +83,21 @@
 
           // Setting the animalImage src attribute to imageUrl
           animalImage.attr("src", imageUrl);
-                    
           animalImage.attr("alt", "animal image");
+          animalImage.attr("data-still","");
+          animalImage.attr("data-animate","");
+          animalImage.attr("data-state","");
+          animalImage.attr("class","");
+
 
           // Prepending the catImage to the images div
           $("#images").prepend(animalImage);
-
+          // $(console.log).text(JSON.stringify(response));
           // $("#animal-view").text(JSON.stringify(response));
         });
-      }
+      } // end function displayAnimal image and info
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
       // Function for displaying animal data
       function renderButtons() {
@@ -113,7 +121,10 @@
           // Adding the button to the buttons-view div
           $("#buttons-view").append(a);
         }
-      }
+      } // end function renderButtons 
+
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
       // This function handles events where one button is clicked
       $("#add-animal").on("click", function (event) {
@@ -128,7 +139,7 @@
 
         // Calling renderButtons which handles the processing of our animal array
         renderButtons();
-      });
+      });// button clicked then make button
 
       // Function for displaying the animal info
       // Using $(document).on instead of $(".animal").on to add event listeners to dynamically generated elements
