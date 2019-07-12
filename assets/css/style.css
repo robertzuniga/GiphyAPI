@@ -1,0 +1,18 @@
+/* Robert Zuniga */
+
+/* button>span {
+    font-size: 2.5rem;
+} */
+
+button {
+    margin: 5px;
+    background-color: cadetblue;
+    color: white;
+}
+
+
+div,
+form,
+input {
+    margin: 10px;
+}
