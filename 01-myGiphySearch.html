@@ -50,7 +50,7 @@
         var animal = $(this).attr("data-name");
         console.log("animal ==> ", animal);
         var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&q=" + animal +
-            "&limit=10";
+            "&limit=2";
 
         console.log("queryURL string ==>",queryURL);
 
@@ -69,9 +69,8 @@
                 console.log("Rating ==> ",response.data[i].rating );
                 var animalImage = $("<img>");
                 animalImage.attr('src',response.data[i].images.fixed_height_still.url);
-                
-                animalDiv.append(animalImage);
                 animalDiv.append(p);
+                animalDiv.append(animalImage);
                 $("#images").prepend(animalDiv);
                 }
     

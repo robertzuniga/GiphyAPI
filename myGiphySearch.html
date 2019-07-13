@@ -26,7 +26,6 @@
         <hr>
         <!-- Animal Giphy will Get Dumped Here -->
         <div id="images"> </div>
-        
         <div id="animal-view"></div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -41,8 +40,7 @@
 
 <script>
     // Initial array of topics
-    var topics = ["dog", "cat","rabbit","hamster", "skunk", "goldfish", "bird", "ferret", "turtle", "sugar glider", "chinchilla",
-                  "hedgehog", "hermit crab", "gerbill", "pigmy goat", "chicken", "capybara", "salamander","frog"];
+    var topics = ["dog", "cat","pig"];
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Function for dumping the JSON content for each button into the div
     function displayAnimalInfo() {
@@ -50,7 +48,7 @@
         var animal = $(this).attr("data-name");
         console.log("animal ==> ", animal);
         var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&q=" + animal +
-            "&limit=10";
+            "&limit=5";
 
         console.log("queryURL string ==>",queryURL);
 
@@ -58,26 +56,34 @@
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-                console.log("Response ==> ", response);
-                console.log("Response.data.length ==>", response.data.length);
+            console.log("Response ==> ", response);
+            console.log("Response.data.length ==>", response.data.length);
+            // for (var i = 0; i < response.data.length, i++) {
+            var imageUrl = response.data[0].images.fixed_height_still.url;
+            console.log("imageUrl ==> ", imageUrl);
+            // Creating and storing an image tag
+            var animalImage = $("<img>");
+            // Setting the animalImage attributes to imageUrl
+            animalImage.attr("src", imageUrl);
+            // animalImage.attr("alt", "animal image");
+            animalImage.attr("data-still", response.data[0].images.fixed_height_still.url);
+            animalImage.attr("data-animate", response.data[0].images.fixed_height.url);
+            animalImage.attr("data-state", "still");
+            animalImage.attr("class", "gif");
+            animalImage.attr("rating", "response.data[0].rating");
             
-            
-                for (var i = 0; i < response.data.length; i++) {
-                var animalDiv = $("<div>");
-                var p = $('<p>').text("Rating: "+ response.data[i].rating);
-            
-                console.log("Rating ==> ",response.data[i].rating );
-                var animalImage = $("<img>");
-                animalImage.attr('src',response.data[i].images.fixed_height_still.url);
-                
-                animalDiv.append(animalImage);
-                animalDiv.append(p);
-                $("#images").prepend(animalDiv);
-                }
+            console.log("animalImage ==> ", animalImage.attr("rating"));
+            console.log("Rating == > ", response.data[0].rating);
+           
+            // Prepending the animalImage to the images div
+            $("#images").prepend(animalImage);
     
-                }
-                // Saving the image_original_url property
-             );
+            // }
+
+
+            // Saving the image_original_url property
+
+        });
     } // end function displayAnimal image and info
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
