@@ -67,7 +67,8 @@
         var animal = $(this).attr("data-name");
         // var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=cats";
         //var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&tag=" + animal;
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&q=cat"
+        // var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&q=cat"
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&q="+ animal;
 
         console.log(queryURL);
 
@@ -77,7 +78,7 @@
         }).then(function (response) {
         console.log(response);
           // Saving the image_original_url property
-          var imageUrl = response.data.image_original_url
+          var imageUrl = response.data[10].images.fixed_height_still.url;
           
           // Creating and storing an image tag
           var animalImage = $("<img>");
