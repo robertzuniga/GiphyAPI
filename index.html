@@ -24,12 +24,12 @@
       <!-- Button triggers new animal to be added -->
       <input id="add-animal" type="submit" value="Click to Add">
     </form>
-
+ 
     <hr>
     <!-- Animal Giphy will Get Dumped Here -->
     <div id="images"> </div>
 
-    <div id="animal-view"></div>
+    <!-- <div id="animal-view"></div> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -51,7 +51,7 @@
     var animal = $(this).attr("data-name");
     console.log("animal ==> ", animal);
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ZGFCXW4DL8GQr4WH9ycZuksvEfPaRaHm&q=" + animal +
-      "&limit=10";
+      "&limit=1";
 
     console.log("queryURL string ==>", queryURL);
 
@@ -59,21 +59,23 @@
       url: queryURL,
       method: "GET"
     }).then(function (response) {
-        console.log("Response ==> ", response);
-        console.log("Response.data.length ==>", response.data.length);
-
-
+        console.log("response ==> ", response);
+        console.log("response.data.length ==>", response.data.length);
+        var results=response.data;
         for (var i = 0; i < response.data.length; i++) {
-          var animalDiv = $("<div>");
-          var p = $('<p>').text("Rating: " + response.data[i].rating);
+            if ( results[i] !== "r" && results[i] !== "pg-13") {
+                var animalDiv = $("<div>");
+                var p = $('<p>').text("Rating: " + response.data[i].rating);
 
-          console.log("Rating ==> ", response.data[i].rating);
-          var animalImage = $("<img>");
-          animalImage.attr('src', response.data[i].images.fixed_height_still.url);
+                console.log("Rating ==> ", response.data[i].rating);
+                var animalImage = $("<img>");
+                animalImage.attr('src', response.data[i].images.fixed_height.url);
 
-          animalDiv.append(animalImage);
-          animalDiv.append(p);
-          $("#images").prepend(animalDiv);
+                animalDiv.append(animalImage);
+                animalDiv.append(p);
+                $("#images").prepend(animalDiv);
+            }
+
         }
 
       }
